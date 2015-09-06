@@ -1,0 +1,10 @@
+{
+  "name": "sanspantalones",
+  "version": "0.0.1",
+  "homepage": "https://github.com/hai5nguy/sanspantalones",
+  "authors": [
+    "hnguyen <hnguyen@exacttarget.com>"
+  ],
+  "description": "The Sans Pantalones Project",
+  "license": "MIT"
+}
