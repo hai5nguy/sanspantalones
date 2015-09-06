@@ -26,12 +26,7 @@ gulp.task('move', [ 'clean' ], function () {
 gulp.task('server', [ 'move' ], function () {
     express.run([ './src/backend/server.js' ]);
 
-    gulp.watch([ './dist/**' ], function (event) {
-        if (event && event.type === 'changed') {
-            console.log('File changed: ', event.path);
-            express.notify(event);
-        }
-    });
+    gulp.watch([ './dist/**' ], express.notify);
 });
 
 
