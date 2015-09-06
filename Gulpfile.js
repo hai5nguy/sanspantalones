@@ -11,11 +11,14 @@ gulp.task('clean', function (cb) {
         cb(error);
     });
 
-
 });
 
 gulp.task('move', [ 'clean' ], function () {
-    return gulp.src('./src/frontend/index.html').pipe(gulp.dest('./dist'));
+    var filesToMove = [
+        './src/frontend/index.html',
+        './src/frontend/test.html'
+    ]
+    return gulp.src(filesToMove).pipe(gulp.dest('./dist'));
 });
 
 
