@@ -1,8 +1,27 @@
 (function() {
     'use strict';
 
+    angular
+        .module('app', ['ui.router'])
+        .config(appConfiguration);
 
-    angular.module('app');
 
+    function appConfiguration($stateProvider, $urlRouterProvider, $locationProvider) {
+            
+        $locationProvider.html5Mode(true);
+
+        $urlRouterProvider.otherwise('/');
+
+        $stateProvider
+            .state('home', {
+                url: '/',
+                templateUrl: '/components/home/home.html'
+            })
+            .state('debug', {
+                url: '/debug',
+                templateUrl: '/components/debug/debug.html'
+            });
+
+    }
 
 })();
