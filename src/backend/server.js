@@ -1,16 +1,16 @@
 var express = require('express');
 
-var config = require('./config.js')
+var config = require('./server-config.js')
 var server = express();
 
 if (SP_ENVIRONMENT === 'local') {
-    server.use(require('connect-livereload')());                   //this must be call before the serving of any static files
+    server.use(require('connect-livereload')());                        //this must be call before the serving of files
 }
 
-server.use(express.static(config.folders.dist));
-server.use('/bower_components', express.static(config.folders.bower));
-// server.use('/*', express.static(config.folders.dist + 'index.html'));  //this is needed to remove hash from url
+server.use('/', express.static(config.folder.dist));
+server.use('/bower_components', express.static(config.folder.bower));
+server.use('/*', express.static(config.file.index));                    //this is needed to remove hash from url
     
 server.listen(SP_PORT, function () {
-    console.log('Sans Pantalones server running on port', SP_PORT);
+    console.log('Server online. Port:', SP_PORT, ' Environment:', SP_ENVIRONMENT);
 });

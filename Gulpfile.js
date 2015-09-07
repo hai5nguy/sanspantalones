@@ -9,33 +9,29 @@ var config = require('./gulp-config.js');
 gulp.task('default', ['server']);
 
 
-
-
 /*******************************************************************************/
 
-gulp.task('server', ['server-setup', 'watch:html', 'watch:js' ]);
-
-gulp.task('watch:js', ['server-setup'], function (cb) {
-    gulp.src(config.watch.js, { base: config.watch.base })
-        .pipe(watch(config.watch.js, { base: config.watch.base }))
-        .pipe(gulp.dest(config.dist.root));
-
-    cb();
-});
-
-gulp.task('watch:html', ['server-setup'], function (cb) {
-    gulp.src(config.watch.html, { base: config.watch.base })
-        .pipe(watch(config.watch.html, { base: config.watch.base }))
-        .pipe(gulp.dest(config.watch.dist));
-
-    cb();
-});
-
-gulp.task('server-setup', [ 'wipe-dist'], function (cb) {
+gulp.task('server', [ 'rebuild-dist' ], function (cb) {
 
     express.run(config.server.executable);
-    gulp.watch(config.server.watchFolders, express.notify);
+    watch(config.server.dist, function (event) {
+        express.notify(event)
+    });
+    watch(config.server.src, function () {
+        console.log('shit has changed');
+        gulp.start('rebuild-dist');
+    });
     cb();
+
+});
+
+gulp.task('rebuild-dist', [ 'wipe-dist' ], function () {
+
+    console.log('uhhh rebuild');
+
+    return gulp
+        .src(config.rebuild.filesToMove, { base: config.rebuild.base })
+        .pipe(gulp.dest(config.rebuild.dist));
 
 });
 
@@ -50,12 +46,108 @@ gulp.task('wipe-dist', function (cb) {
 
 });
 
+
+
 /*******************************************************************************/
 
 
 
+// 
+// gulp.task('server', ['server-setup', 'watch:html', 'watch:js', 'watch:deletion' ]);
+
+// gulp.task('watch:js', ['wipe-dist'], function (cb) {
+//     gulp.src(config.watch.js, { base: config.watch.base })
+//         .pipe(watch(config.watch.js, { base: config.watch.base }))
+//         .pipe(del[config.del.dist]);
+//         .pipe(gulp.dest(config.watch.dist));
+
+//     cb();
+// });
+
+// gulp.task('watch:html', ['wipe-dist'], function (cb) {
+//     gulp.src(config.watch.html, { base: config.watch.base })
+//         .pipe(watch(config.watch.html, { base: config.watch.base }))
+//         .pipe(gulp.dest(config.watch.dist));
+
+//     cb();
+// });
 
 
+// gulp.task('server-setup', [ 'wipe-dist'], function (cb) {
+
+//     express.run(config.server.executable);
+//     gulp.watch(config.server.watchFolders, express.notify);
+//     cb();
+
+// });
+
+
+
+// gulp.task('rebuild-dist', [ 'wipe-dist' ], function () {
+
+//     return gulp
+//         .src(config.rebuild.filesToMove, { base: config.rebuild.base })
+//         .pipe(gulp.dest(config.rebuild.dist));
+
+// });
+
+
+// gulp.task('wipe-dist', function (cb) {
+
+//     del(config.del.dist).then(function () {
+//         cb();
+//     }, function (error) {
+//         cb(error);
+//     });
+
+// });
+
+
+// gulp.task('watch:deletion', function (cb) {
+//     gulp.watch(['./src/**/*'], function (event) {
+//         if (event && event.type === 'deleted') {
+//             console.log('stopping');
+//             express.stop();
+//             gulp.start('server');
+//         }
+
+//     });
+//     cb();
+// });
+
+
+// /*******************************************************************************/
+
+
+
+
+// function handleFileDeletionBecauseGulpDestIsStupid(vinylInstance) {
+
+//     setTimeout(function () {
+//         console.log('inside timer')
+//     }, 5000);
+
+//     console.log('yo');
+
+
+
+//     // if (vinylInstance && vinylInstance.event === 'unlink') {
+//     //     return del(config.del.dist).then(function() {
+//     //         return config.watch.dist
+//     //     }, function () {
+//     //         console.log('this should never happen, tell hai');
+//     //         return config.watch.dist
+//     //     });
+//     // } else {
+//     //     return config.watch.dist
+//     // }
+
+// }
+
+
+
+
+/*******************************************************************************/
 
 
 
