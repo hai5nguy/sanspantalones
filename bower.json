@@ -6,5 +6,9 @@
     "hnguyen <hnguyen@exacttarget.com>"
   ],
   "description": "The Sans Pantalones Project",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "angular": "~1.4.5",
+    "angular-ui-router": "~0.2.15"
+  }
 }
