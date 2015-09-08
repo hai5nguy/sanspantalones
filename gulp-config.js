@@ -19,7 +19,11 @@ module.exports = {
     },
 
     sass: {
-        scss: './src/frontend/sass/style.scss'
+        css: 'style.css',
+        source: [ 
+            frontend + 'sass/style.scss',
+            frontend + '**/*.sass'
+        ]
     },
 
     server: {

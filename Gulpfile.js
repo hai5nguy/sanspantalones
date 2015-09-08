@@ -3,6 +3,7 @@ var express = require('gulp-express');
 var del     = require('del');
 var watch   = require('gulp-watch');
 var sass    = require('gulp-sass');
+var concat  = require('gulp-concat');
 
 var config = require('./gulp-config.js');
 
@@ -34,8 +35,9 @@ gulp.task('move', [ 'wipe-dist' ], function () {
 });
 
 gulp.task('sass', [ 'wipe-dist' ], function () {
-    return gulp.src(config.sass.scss)
+    return gulp.src(config.sass.source)
         .pipe(sass().on('error', sass.logError))
+        .pipe(concat(config.sass.css))
         .pipe(gulp.dest(config.dist));
 });
 
