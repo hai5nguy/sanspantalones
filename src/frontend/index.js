@@ -10,7 +10,6 @@
             
         $locationProvider.html5Mode(true);
 
-        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('home', {
@@ -22,6 +21,8 @@
                 templateUrl: '/components/debug/debug.html'
             });
 
+        $urlRouterProvider.otherwise('/');
+        
     }
 
 })();
