@@ -15,6 +15,8 @@
     * **src** - Source folder.
       * **backend** - All things related to backend here.  Node modules, app, etc
         * **modules** - all modules
+          global.js - all global variables and core functionalities
+        * **routes**
       * **frontend** - All things related to the frontend here.  Angular files, markup, styling, etc
         * **components** - Angular modules, directives, controllers
         * **img** - all images, spite sheets, etc
