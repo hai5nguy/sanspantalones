@@ -17,3 +17,5 @@
         * **modules** - all modules
       * **frontend** - All things related to the frontend here.  Angular files, markup, styling, etc
         * **components** - Angular modules, directives, controllers
+        * **img** - all images, spite sheets, etc
+        * **sass** - sass files, do we need this?
