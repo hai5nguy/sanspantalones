@@ -1,5 +1,5 @@
 var gulp    = require('gulp');
-var express = require('gulp-express');
+var gls     = require('gulp-live-server');
 var del     = require('del');
 var watch   = require('gulp-watch');
 var sass    = require('gulp-sass');
@@ -7,26 +7,37 @@ var concat  = require('gulp-concat');
 
 var config = require('./gulp-config.js');
 
+var server = gls.new(config.server.executable);
+
 /*******************************************************************************/
 
 gulp.task('default', ['server']);
 
 /*******************************************************************************/
 
-gulp.task('server', [ 'rebuild-dist' ], function (cb) {
+gulp.task('server', [ 'build-dist', 'watch' ], function (cb) {
+    server.start().then(function () {
+        cb();
+    }, function (error) {
+        cb(error);
+    });
+});
 
-    express.run(config.server.executable);
-    watch(config.server.dist, function (event) {
-        express.notify(event)
+
+gulp.task('watch', [ 'build-dist' ], function () {
+
+    watch(config.watch, function (event) {
+        gulp.start('rebuild-dist')
     });
-    watch(config.server.src, function () {
-        gulp.start('rebuild-dist');
-    });
-    cb();
 
 });
 
-gulp.task('rebuild-dist', [ 'move', 'sass' ]);
+gulp.task('rebuild-dist', [ 'build-dist' ], function (cb) {
+    gulp.src(config.index).pipe(server.notify());
+    cb();
+});
+
+gulp.task('build-dist', [ 'move', 'sass' ]);
 
 gulp.task('move', [ 'wipe-dist' ], function () {
     return gulp
@@ -35,9 +46,8 @@ gulp.task('move', [ 'wipe-dist' ], function () {
 });
 
 gulp.task('sass', [ 'wipe-dist' ], function () {
-    return gulp.src(config.sass.source)
+    return gulp.src(config.sass.scss)
         .pipe(sass().on('error', sass.logError))
-        .pipe(concat(config.sass.css))
         .pipe(gulp.dest(config.dist));
 });
 

@@ -4,7 +4,7 @@ var config = require('./server-config.js')
 var server = express();
 
 if (SP_ENVIRONMENT === 'local') {
-    server.use(require('connect-livereload')());                        //this must be call before the serving of files
+    server.use(require('connect-livereload')());   //this will be manually injected                     //this must be call before the serving of files
 }
 
 server.use('/', express.static(config.folder.dist));

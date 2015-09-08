@@ -10,6 +10,7 @@ module.exports = {
     },
 
     dist: './dist/',
+    index: './dist/index.html',
 
     move: {
         source: [
@@ -19,17 +20,15 @@ module.exports = {
     },
 
     sass: {
-        css: 'style.css',
-        source: [ 
-            frontend + 'sass/style.scss',
-            frontend + '**/*.sass'
-        ]
+        scss: frontend + 'sass/style.scss'
     },
 
     server: {
-        dist: './dist/**/*',
-        executable: [ './src/backend/server.js' ],
-        src: [ './src/**/*' ]
-    }
+        executable: './src/backend/server.js'
+    },
+
+    watch: [
+        './src/**/*'
+    ]
 
 }
