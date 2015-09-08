@@ -3,21 +3,26 @@ var components = './src/frontend/components/';
 
 module.exports = {
 
+    base: frontend,
+
     del: {
         dist: ['./dist/**', '!./dist']
     },
 
-    rebuild: {
-        base: frontend,
-        dist: './dist/',
-        filesToMove: [
+    dist: './dist/',
+
+    move: {
+        source: [
             frontend + '**/*.js' ,
             frontend + '**/*.html'
         ]
     },
 
+    sass: {
+        scss: './src/frontend/sass/style.scss'
+    },
+
     server: {
-        base: frontend,
         dist: './dist/**/*',
         executable: [ './src/backend/server.js' ],
         src: [ './src/**/*' ]

@@ -8,3 +8,6 @@ global.SP_FRONTEND_FOLDER   = __dirname + '/../../frontend/';
 
 global.SP_DIST_FOLDER       = SP_PROJECT_FOLDER + 'dist/'
 
+
+
+
