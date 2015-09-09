@@ -1,9 +1,11 @@
-var gulp    = require('gulp');
-var gls     = require('gulp-live-server');
-var del     = require('del');
-var watch   = require('gulp-watch');
-var sass    = require('gulp-sass');
-var concat  = require('gulp-concat');
+var gulp        = require('gulp');
+var gls         = require('gulp-live-server');
+var del         = require('del');
+var watch       = require('gulp-watch');
+var sass        = require('gulp-sass');
+var concat      = require('gulp-concat');
+var inject      = require('gulp-inject');
+var htmlReplace = require('gulp-html-replace');
 
 var config = require('./gulp-config.js');
 
@@ -37,12 +39,25 @@ gulp.task('rebuild-dist', [ 'build-dist' ], function (cb) {
     cb();
 });
 
-gulp.task('build-dist', [ 'move', 'sass' ]);
+gulp.task('build-dist', [ 'inject', 'move', 'sass' ]);
 
 gulp.task('move', [ 'wipe-dist' ], function () {
     return gulp
         .src(config.move.source, { base: config.base })
         .pipe(gulp.dest(config.dist))
+});
+
+gulp.task('inject', [ 'move', 'inject:livereload' ] );
+
+gulp.task('inject:livereload', [ 'wipe-dist' ], function () {
+
+    var d = new Date();
+    var timestamp = d.valueOf();
+
+    return gulp.src('./src/frontend/index.html')
+        .pipe(htmlReplace({ 'livereload': '//localhost:35729/livereload.js?v=' + timestamp }))
+        .pipe(gulp.dest('./dist/'));
+
 });
 
 gulp.task('sass', [ 'wipe-dist' ], function () {

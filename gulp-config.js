@@ -12,10 +12,16 @@ module.exports = {
     dist: './dist/',
     index: './dist/index.html',
 
+    inject: {
+        sources: [],
+        target: frontend + 'index.html'
+    },
+
     move: {
         source: [
             frontend + '**/*.js' ,
-            frontend + '**/*.html'
+            frontend + '**/*.html',
+            '!' + frontend + 'index.html'   //moved by gulp-inject
         ]
     },
 
