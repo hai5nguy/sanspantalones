@@ -20,8 +20,7 @@ module.exports = {
     move: {
         source: [
             frontend + '**/*.js' ,
-            frontend + '**/*.html',
-            '!' + frontend + 'index.html'   //moved by gulp-inject
+            frontend + '**/*.html'
         ]
     },
 

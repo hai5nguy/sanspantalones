@@ -17,16 +17,19 @@
   },
   "homepage": "https://github.com/hai5nguy/sanspantalones",
   "dependencies": {
-    "express": "^4.13.3"
+    "express": "^4.13.3",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "del": "^2.0.1",
     "gulp": "^3.9.0",
+    "gulp-angular-filesort": "^1.1.1",
     "gulp-concat": "^2.6.0",
     "gulp-html-replace": "^1.5.1",
     "gulp-inject": "^1.5.0",
     "gulp-live-server": "0.0.27",
     "gulp-sass": "^2.0.4",
-    "gulp-watch": "^4.3.5"
+    "gulp-watch": "^4.3.5",
+    "wiredep": "^3.0.0-beta"
   }
 }
