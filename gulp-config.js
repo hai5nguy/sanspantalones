@@ -20,7 +20,8 @@ module.exports = {
     move: {
         source: [
             frontend + '**/*.js' ,
-            frontend + '**/*.html'
+            frontend + '**/*.html',
+            '!' + frontend + 'index.html'  //moved by inject task
         ]
     },
 

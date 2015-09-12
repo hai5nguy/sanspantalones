@@ -59,7 +59,7 @@ function buildDistFolder() {
     });
 }
 function notifyServer() {
-    return gulp.src('')
+    return gulp.src(config.index).pipe(server.notify());
 }
 
 /* sass *****************************************************************/
@@ -72,10 +72,24 @@ function processSassFiles() {
 
 /* inject ***************************************************************/
 
+gulp.task('newinject', [ 'copy' ], newinjectblah)
+function newinjectblah() {
+
+    return gulp.src('./src/index.html')
+        .pipe(injectBower());
+        .pipe(gulp.dest('./dist/'))
+
+}
+
+function injectBower() {
+    return wiredep({
+    });
+}
+
 function injectBowerIntoIndex() {
     return gulp.src('./dist/index.html')
         .pipe(wiredep({
-            ignorePath: '../../'
+            ignorePath: '/../../../'
         }))
         .pipe(gulp.dest('./dist/'));
 }
@@ -87,7 +101,7 @@ function injectAngularIntoIndex() {
 
     var destination = gulp.dest('./dist');
 
-    return index.pipe(inject(angularFiles, { name: 'angular'} ))
+    return index.pipe(inject(angularFiles, { name: 'angular', ignorePath: '/src/frontend' } ))
                 .pipe(destination);
 }
 function injectLiveReloadIntoIndex() {
