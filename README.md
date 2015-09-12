@@ -6,6 +6,10 @@
     bower update
     gulp
 
+Browse to
+
+    http://localhost:5000/
+
 ### Project Structure
 
   * **sanspantalones** - The main project folder
