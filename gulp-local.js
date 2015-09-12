@@ -13,7 +13,6 @@ var config          = require('./gulp-config.js');
 
 var server;
 
-// gulp.task('local', [ 'newinject' ]);
 gulp.task('local', [ 'watch' ], startServer);
 gulp.task('watch', [ 'build'], watchForSourceChanges );
 gulp.task('build', [ 'sass', 'inject' ]);
@@ -69,6 +68,7 @@ function injectIntoIndex() {
         .pipe(injectAngular())
         .pipe(injectLiveReload())
         .pipe(injectStyleSheetLink())
+        .pipe(injectReloadTimerScript())
         .pipe(gulp.dest(config.dist.root));
 
 
@@ -95,6 +95,12 @@ function injectIntoIndex() {
     function injectStyleSheetLink() {
         var findString         = '<!-- the style.css link goes here -->';
         var replaceString   = '<link type="text/css" rel="stylesheet" href="style.css?v=' + timestamp + '"></link>';
+        return replace(findString, replaceString)
+    }
+
+    function injectReloadTimerScript() {
+        var findString      = '<!-- reload-timer.js script goes here -->';
+        var replaceString   = '<script src="components/debug/reload-timer.js?v=' + timestamp + '"></script>';
         return replace(findString, replaceString)
     }
 
