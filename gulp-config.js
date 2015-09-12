@@ -1,21 +1,40 @@
-var frontend = './src/frontend/';
-var components = './src/frontend/components/';
+var src = './src/'
+
+var backend = src + 'backend/'
+var frontend = src + 'frontend/';
+
+var components = frontend + 'components/';
+
+var dist = './dist/'
 
 module.exports = {
 
-    base: frontend,
+
+    /* paths **********************************************/
+    backend: {
+        root: backend
+        server: backend + 'server.js'
+    },
+    frontend: {
+        root: frontend,
+        index: frontend + 'index.html'
+    },
+    dist: {
+        root: dist,
+        index: dist + 'index.html'
+    }
+
+
+    /* plugin specifics ***********************************/
+    sass: {
+        scss: frontend + 'sass/style.scss'
+    },
+
 
     del: {
-        dist: ['./dist/**', '!./dist']
+        target: ['./dist/**', '!./dist']
     },
 
-    dist: './dist/',
-    index: './dist/index.html',
-
-    inject: {
-        sources: [],
-        target: frontend + 'index.html'
-    },
 
     move: {
         source: [
@@ -25,16 +44,8 @@ module.exports = {
         ]
     },
 
-    sass: {
-        scss: frontend + 'sass/style.scss'
-    },
-
-    server: {
-        executable: './src/backend/server.js'
-    },
-
     watch: [
-        './src/**/*'
+        src + '**/*'
     ]
 
 }
