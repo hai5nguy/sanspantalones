@@ -1,16 +1,23 @@
-<section class="sandbox">
+<section class="sandbox" ng-controller="SandBoxController as vm" >
     <a ui-sref="home">Home</a>
 
-    <br />
+    <p>This is the sandbox.  You can also get here via url.</p>
 
-    <a ui-sref=".componentcow">show component cow</a>
-    <a ui-sref=".componentkitty">show component kitty</a>
+    <a ui-sref=".componentcow">Show Component Cow</a>
+    <a class="kitty" ui-sref=".componentkitty">Show Component Kitty</a>
     <div ui-view></div>
 
 
     <hr />
+
+    <div id="llama-container">
+        <button id="add-llama" ng-click="vm.addLlama()">Add Component Llama</button>
+
+    </div>
+
+    <hr />
     <div class="test-image">
-        <p>if you see an image below, image serving is working:<p>
+        <p>If you see an image below, image serving is working:<p>
         <img src="/img/sharibble.png"></img>
     </div>
     <hr />

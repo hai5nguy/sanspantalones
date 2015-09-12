@@ -13,6 +13,14 @@ var config          = require('./gulp-config.js');
 
 var server;
 
+gulp.task('test', function () {
+    server.stop().then(function () {
+        startServer(function() {});
+    });
+
+    cb();
+});
+
 gulp.task('local', [ 'watch' ], startServer);
 gulp.task('watch', [ 'build'], watchForSourceChanges );
 gulp.task('build', [ 'sass', 'inject' ]);
