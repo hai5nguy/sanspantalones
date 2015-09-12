@@ -18,18 +18,18 @@
             }
         }
 
-        var examples = {
+        var sandbox = {
             root: {
-                url: '/examples',
-                templateUrl: '/components/examples/examples.html'
+                url: '/sandbox',
+                templateUrl: '/components/sandbox/sandbox.html'
             },
             componentcow: {
                 url: '',
-                templateUrl: '/components/examples/componentcow/componentcow.html'
+                templateUrl: '/components/sandbox/componentcow/componentcow.html'
             },
             componentkitty: {
                 url: '',
-                templateUrl: '/components/examples/componentkitty/componentkitty.html',
+                templateUrl: '/components/sandbox/componentkitty/componentkitty.html',
             }
         }
 
@@ -42,9 +42,9 @@
 
         $stateProvider
             .state('home', home.root)
-            .state('examples', examples.root)
-            .state('examples.componentcow', examples.componentcow)
-            .state('examples.componentkitty', examples.componentkitty)
+            .state('sandbox', sandbox.root)
+            .state('sandbox.componentcow', sandbox.componentcow)
+            .state('sandbox.componentkitty', sandbox.componentkitty)
             .state('debug', debug.root);
 
         $urlRouterProvider.otherwise('/');

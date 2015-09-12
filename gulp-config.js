@@ -12,7 +12,7 @@ module.exports = {
 
     /* paths **********************************************/
     backend: {
-        root: backend
+        root: backend,
         server: backend + 'server.js'
     },
     frontend: {
@@ -22,7 +22,7 @@ module.exports = {
     dist: {
         root: dist,
         index: dist + 'index.html'
-    }
+    },
 
 
     /* plugin specifics ***********************************/

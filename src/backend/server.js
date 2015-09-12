@@ -5,6 +5,7 @@ var server = express();
 
 server.use('/', express.static(config.folder.dist));
 server.use('/bower_components', express.static(config.folder.bower));
+server.use('/img', express.static(config.folder.img));
 server.use('/*', express.static(config.file.index));                    //this is needed to remove hash from url
     
 server.listen(SP_PORT, function () {

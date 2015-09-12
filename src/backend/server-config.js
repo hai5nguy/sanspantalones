@@ -7,7 +7,8 @@ module.exports = {
     },
     folder: {
         bower: SP_PROJECT_FOLDER + 'bower_components/',
-        dist: SP_PROJECT_FOLDER + 'dist/'
+        dist: SP_PROJECT_FOLDER + 'dist/',
+        img: SP_FRONTEND_FOLDER + 'img/'
     }
 
 }
