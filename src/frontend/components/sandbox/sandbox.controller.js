@@ -8,19 +8,9 @@
 
     function SandBoxController($scope, $element, $compile) {
 
-        $scope.vm.addLlama = function () {
-
-            console.log('adding llama');
-
-            // debugger;
-            
-            var llama = $compile('<sp-component-llama></sp-component-llama>')($scope);
+        $scope.test = function () {
+            var llama = $compile('<sp-component-llama></sp-component-llama>')($scope.$new());
             $element.find('#llama-container').append(llama);
-
-            debugger;
-            
-            
-            // $scope.
         }
 
     }

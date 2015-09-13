@@ -1,4 +1,4 @@
-<section class="sandbox" ng-controller="SandBoxController as vm" >
+<section class="sandbox" ng-controller="SandBoxController" >
     <a ui-sref="home">Home</a>
 
     <p>This is the sandbox.  You can also get here via url.</p>
@@ -11,7 +11,9 @@
     <hr />
 
     <div id="llama-container">
-        <button id="add-llama" ng-click="vm.addLlama()">Add Component Llama</button>
+        <!-- <button ng-click="vm.addLlama()">Add Component Llama</button> -->
+        <button ng-click="test()">Add Component Llama</button>
+        <sp-component-llama></sp-component-llama>
 
     </div>
 
