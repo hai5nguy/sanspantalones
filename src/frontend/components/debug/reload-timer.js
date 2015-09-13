@@ -6,20 +6,19 @@ on the lower right hand corder
 
     $(function () {
 
-
         var start = new Date();
-        var timerDiv = $('<div>Page reloaded: <span></span> seconds ago.</div>').css({
+
+        var timerDiv = $('<div>Page reloaded: <span style="font-size: 14px;"></span> seconds ago.</div>').css({
                                 'position': 'absolute',
                                 'bottom': '0px',
                                 'right': '0px',
                                 'font-size': '10px'
                             }).appendTo('body');
-        var timerSpan = timerDiv.find('span')
-            .css('font-size', '14px');
+
         var timerId = setInterval(function () {
             var now = new Date();
             var seconds = Math.round((now - start) / 100) / 10;
-            timerSpan.text(seconds);
+            timerDiv.find('span').text(seconds);
         }, 600);
 
 

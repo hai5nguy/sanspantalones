@@ -76,7 +76,6 @@ function injectIntoIndex() {
         .pipe(injectAngular())
         .pipe(injectLiveReload())
         .pipe(injectStyleSheetLink())
-        .pipe(injectReloadTimerScript())
         .pipe(gulp.dest(config.dist.root));
 
 
@@ -103,12 +102,6 @@ function injectIntoIndex() {
     function injectStyleSheetLink() {
         var findString         = '<!-- the style.css link goes here -->';
         var replaceString   = '<link type="text/css" rel="stylesheet" href="style.css?v=' + timestamp + '"></link>';
-        return replace(findString, replaceString)
-    }
-
-    function injectReloadTimerScript() {
-        var findString      = '<!-- reload-timer.js script goes here -->';
-        var replaceString   = '<script src="components/debug/reload-timer.js?v=' + timestamp + '"></script>';
         return replace(findString, replaceString)
     }
 

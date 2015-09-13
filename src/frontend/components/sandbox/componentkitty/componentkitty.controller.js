@@ -8,7 +8,7 @@
 
     function ComponentKittyController($scope) {
 
-        $scope.vm.handleClick = function () {
+        $scope.handleClick = function () {
             $(event.currentTarget).toggleClass('clicked');
         }
 
