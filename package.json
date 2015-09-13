@@ -18,7 +18,8 @@
   "homepage": "https://github.com/hai5nguy/sanspantalones",
   "dependencies": {
     "express": "^4.13.3",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "del": "^2.0.1",
