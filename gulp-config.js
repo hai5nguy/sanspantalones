@@ -42,10 +42,6 @@ module.exports = {
             frontend + '**/*.html',
             '!' + frontend + 'index.html'  //moved by inject task
         ]
-    },
-
-    watch: [
-        src + '**/*'
-    ]
+    }
 
 }

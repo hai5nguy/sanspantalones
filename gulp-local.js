@@ -13,13 +13,6 @@ var config          = require('./gulp-config.js');
 
 var server;
 
-gulp.task('test', function () {
-    server.stop().then(function () {
-        startServer(function() {});
-    });
-
-    cb();
-});
 
 gulp.task('local', [ 'watch' ], startServer);
 gulp.task('watch', [ 'build'], watchForSourceChanges );
@@ -42,16 +35,29 @@ gulp.task('clean', wipeDistributionFolder);
 
 function startServer(cb) {
     server = gls.new(config.backend.server);
-    server.start().then(function () {
-        cb();
-    }, function (error) {
-        cb(error);
+    server.start().then(function (result) {
+        if (result && result.code === 1) {
+            killLiveReloadServerIfRunning();
+            console.error("Unable start server.");
+        }
     });
+
+    if (typeof cb === 'function') { 
+        cb();
+    }
 }
 function watchForSourceChanges() {
-    watch(config.watch, function (event) {
+    watch(config.frontend.root + '**/*', function (event) {
         gulp.start('rebuild');
     });
+
+    watch(config.backend.root + '**/*', function (event) {
+        console.log('Backend changes detected, restarting server...');
+        server.stop().then(function () {
+            startServer();
+        });
+    });
+
 }
 function notifyServer() {
     return gulp.src(config.dist.index).pipe(server.notify());
@@ -119,5 +125,16 @@ function wipeDistributionFolder(cb) {
         cb();
     }, function (error) {
         cb(error);
+    });
+}
+
+
+/************************************************************************/
+/* this is require because sometimes the tiny-lr server from 
+gulp-live-server doesn't exit gracefully */
+
+function killLiveReloadServerIfRunning() {
+    require('http').get('http://localhost:35729/kill').on('error', function () {
+        //i don't care about errors here
     });
 }

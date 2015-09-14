@@ -10,7 +10,6 @@
             
         $locationProvider.html5Mode(true);
 
-
         var home = {
             root: {
                 url: '/',

@@ -20,7 +20,7 @@ global.PROMISIFY = function(workFunction) {
     }
 }
 
-global.BASEMODULE = function (initialAttributes) {
+global.BASEITEM = function (initialAttributes) {
     var self = this;
     self.error = null;
 
