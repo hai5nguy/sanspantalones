@@ -2,9 +2,9 @@ var Q = require('../../' + 'q')
 var _ = require('../../' + 'underscore');
 
 global.PROMISIFY = function(workFunction) {
-    return function (params) {
+    return function (args) {
         return Q.Promise(function (resolve, reject) {
-            workFunction(params, resolve, reject);
+            workFunction(args, resolve, reject);
         });
     }
 }

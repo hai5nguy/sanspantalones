@@ -5,7 +5,7 @@ module.exports = function (server) {
 
     server.get('/api/v1/samples/apple/:id', function (req, res) {
 
-        var id = req.params.id;
+        var id = req.args.id;
 
         var apple = new AppleModule();
 

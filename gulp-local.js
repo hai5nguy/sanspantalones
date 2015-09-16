@@ -143,6 +143,7 @@ function copyFilesToDist() {
         .src(config.move.source, { base: config.frontend.root })
         .pipe(gulp.dest(config.dist.root))
 }
+
 function wipeDistributionFolder(cb) {
     del(config.del.target).then(function () {
         cb();

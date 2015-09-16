@@ -2,9 +2,9 @@ var Q = require('../../node_modules/q');
 var _ = require('../../node_modules/underscore');
 
 global.PROMISIFY = function(workFunction) {
-    return function (params) {
-        return Q.Promise(function (resolve, reject) {
-            workFunction(params, resolve, reject);
+    return function (args) {
+        return Q.Promise(function (resolve, reject, notify) {
+            workFunction(args, resolve, reject, notify);
         });
     }
 }
