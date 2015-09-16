@@ -1,0 +1,1 @@
+The localdb/db folder is used to store the local database.  This file acts a placeholder for git to record.

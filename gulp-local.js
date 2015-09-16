@@ -8,26 +8,29 @@ var inject          = require('gulp-inject');
 var replace         = require('gulp-replace');
 var wiredep         = require('wiredep').stream;
 var angularFilesort = require('gulp-angular-filesort');
+var exec            = require('child_process').exec;
 
 var config          = require('./gulp-config.js');
 
 var server;
 
-gulp.task('local', [ 'watch' ], startServer);
+/***/
+gulp.task('local', [ 'watch', 'mongo' ], startServer);
+
 gulp.task('watch', [ 'build'], watchForSourceChanges );
+gulp.task('mongo', [ 'mongo:stop' ], startMongo);
+
 gulp.task('build', [ 'sass', 'inject' ]);
 
-gulp.task('rebuild', [ 'build'], notifyServer);
-
-/***/
 gulp.task('sass', [ 'copy' ], processSassFiles);
-
-/***/
 gulp.task('inject', [ 'copy' ], injectIntoIndex);
 
-/***/
 gulp.task('copy', [ 'clean' ], copyFilesToDist);
+
 gulp.task('clean', wipeDistributionFolder);
+
+/***/
+gulp.task('rebuild', [ 'build'], notifyServer);
 
 
 /* local ****************************************************************/
@@ -60,6 +63,38 @@ function watchForSourceChanges() {
 }
 function notifyServer() {
     return gulp.src(config.dist.index).pipe(server.notify());
+}
+
+
+/* mongo ****************************************************************/
+
+function startMongo(cb) {
+
+    exec('mongo admin --eval "db.shutdownServer()"', function () {
+        console.log('shutting down mongo');
+
+        var mongo = exec('mongod --dbpath ./localdb/db/');
+        mongo.stdout.on('data', function (data) {
+            if (data.indexOf('waiting for connections on port') !== -1) {
+                console.log('Mongo daemon running');
+                cb();
+            }
+            if (data.indexOf('dbexit') !== -1) {
+                console.error('Unable to start mongo!');
+                cb(data);
+            }
+        });
+    });
+    
+}
+
+
+//in case we need this, keeping it here
+//
+gulp.task('mongo:stop', mongoStop);
+
+function mongoStop(cb) {
+
 }
 
 /* sass *****************************************************************/
@@ -137,3 +172,6 @@ function killLiveReloadServerIfRunning() {
         //i don't care about errors here
     });
 }
+
+
+
