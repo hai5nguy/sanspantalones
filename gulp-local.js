@@ -32,7 +32,6 @@ gulp.task('clean', wipeDistributionFolder);
 /***/
 gulp.task('rebuild', [ 'build'], notifyServer);
 
-
 /* local ****************************************************************/
 
 function startServer(cb) {
@@ -48,6 +47,7 @@ function startServer(cb) {
         cb();
     }
 }
+
 function watchForSourceChanges() {
     watch(config.frontend.root + '**/*', function (event) {
         gulp.start('rebuild');
