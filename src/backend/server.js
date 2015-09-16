@@ -1,8 +1,11 @@
 var express     = require('express');
 var bodyParser  = require('body-parser');
 
+require('./globals.js');  //must be first
+require('./core.js');
+require('./mongo.js');
+var config = require('./server-config.js');
 
-var config = require('./server-config.js')
 var server = express();
 
 require('./routes/routes.js')(server);
