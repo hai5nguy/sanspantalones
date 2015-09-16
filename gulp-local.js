@@ -18,7 +18,7 @@ var server;
 gulp.task('local', [ 'watch', 'mongo' ], startServer);
 
 gulp.task('watch', [ 'build'], watchForSourceChanges );
-gulp.task('mongo', [ 'mongo:stop' ], startMongo);
+gulp.task('mongo', startMongo);
 
 gulp.task('build', [ 'sass', 'inject' ]);
 
@@ -71,12 +71,10 @@ function notifyServer() {
 function startMongo(cb) {
 
     exec('mongo admin --eval "db.shutdownServer()"', function () {
-        console.log('shutting down mongo');
 
         var mongo = exec('mongod --dbpath ./localdb/db/');
         mongo.stdout.on('data', function (data) {
             if (data.indexOf('waiting for connections on port') !== -1) {
-                console.log('Mongo daemon running');
                 cb();
             }
             if (data.indexOf('dbexit') !== -1) {
@@ -86,15 +84,6 @@ function startMongo(cb) {
         });
     });
     
-}
-
-
-//in case we need this, keeping it here
-//
-gulp.task('mongo:stop', mongoStop);
-
-function mongoStop(cb) {
-
 }
 
 /* sass *****************************************************************/

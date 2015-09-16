@@ -29,3 +29,5 @@ dist/
 bower_components/
 scratch/
 .idea/
+localdb/db/
+!localdb/db/placeholder.txt
