@@ -31,6 +31,18 @@ module.exports = function (server) {
         
     });
 
+    server.post('/api/v1/samples/apple', function (req, res) {
+
+        var apple = new AppleModule();
+
+        apple.makeAnApple({ name: req.body.name }).then(function () {
+            res.json(apple.get());
+        }, function () {
+            res.status(500).send(apple.error);
+        });
+
+    });
+
     
 }  //module.exports
 

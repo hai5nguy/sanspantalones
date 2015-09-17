@@ -1,4 +1,4 @@
-var Q                   = require(SP_MODULES_FOLDER + 'q');
+var Q                   = require(SP_NODE_MODULES + 'q');
 // var _                   = require(LL_NODE_MODULES_DIR + 'underscore');
 
 var APPLE_COLLECTION = 'apple'
@@ -8,7 +8,7 @@ module.exports  = {
 };
 
 
-function Fruit() {
+function Fruits() {
     return {
         Apple: Apple()
     }
@@ -24,7 +24,12 @@ function Fruit() {
             DB_SERVER.collection('apples').insertOne({ name: args.name }, function (error, result) {
                 console.log('error ', error);
                 console.log('result ', result);
-                resolve(result);
+
+                if (!error) {
+                    resolve(result[0]);
+                } else {
+                    reject(error);
+                }
             });
         }
 

@@ -8,10 +8,11 @@ var config = require('./server-config.js');
 
 var server = express();
 
-require('./routes/routes.js')(server);
 
 server.use(bodyParser.json());                                          // to support JSON-encoded bodies
 server.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
+
+require('./routes/routes.js')(server);
 
 if (SP_ENVIRONMENT === 'local') {
     server.use('/bower_components', express.static(config.folder.bower));
