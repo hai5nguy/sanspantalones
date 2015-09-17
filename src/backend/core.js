@@ -32,7 +32,7 @@ global.BASECOLLECTION = function (initialItems) {
     collection.add = function (items) {
         this._items = this._items.concat(items);
     }
-    collection.remove = function (id) {
+    collection.remove = function (id) {  //needs to be rewritten to be more flexible
         this._items = _.without(this._items, _.findWhere(this._items, { _id: id }));
     }
     return collection
