@@ -1,3 +1,11 @@
+/* 
+This is the samples route.  The purpose of a route is to connect the front end rest calls to other modules.  This one connects to the Apple Module.  No other logic should be in here.  Routes should only be the 'glue' between the front end and the backend modules.
+
+IMPORTANT!
+All routes must be required in into routes.js for them to attach to express.
+
+*/
+
 var Q           = require(SP_NODE_MODULES + 'q');
 var AppleModule = require(SP_MODULES_FOLDER + 'Samples/Apple.Module.js');
 
