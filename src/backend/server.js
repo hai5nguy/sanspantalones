@@ -8,7 +8,6 @@ var config = require('./server-config.js');
 
 var server = express();
 
-
 server.use(bodyParser.json());                                          // to support JSON-encoded bodies
 server.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
 

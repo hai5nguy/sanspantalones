@@ -11,7 +11,7 @@ Sample Data Flow:
 var Q                   = require(SP_NODE_MODULES + 'q');
 // var _                   = require(LL_NODE_MODULES_DIR + 'underscore');
 
-var APPLE_COLLECTION = 'apple'
+var APPLE_COLLECTION = 'apples'
 
 module.exports  = {
     Fruits: Fruits()
@@ -31,7 +31,7 @@ function Fruits() {
         }
 
         function create(args, resolve, reject) {
-            DB_SERVER.collection('apples').insertOne({ name: args.name }, function (error, result) {
+            DB_SERVER.collection(APPLE_COLLECTION).insertOne({ name: args.name }, function (error, result) {
                 console.log('error ', error);
                 console.log('result ', result);
 

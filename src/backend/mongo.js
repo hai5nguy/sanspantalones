@@ -5,6 +5,6 @@ MongoClient.connect(SP_DB_CONNECTION_STRING, function (err, db) {
         console.error('Unable to connect to mongo server.');
     } else {
         console.log('Connected to Mongo.');
-        global.DB_SERVER = db
+        global.DB_SERVER = db;
     }
 });
