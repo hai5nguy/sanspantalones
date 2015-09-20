@@ -4,12 +4,11 @@ var Q           = require(SP_NODE_MODULES + 'q');
 module.exports = function (server) {
 
 
-    server.get('/:roomname', function (req, res) {
-        console.log(req.originalUrl);
+    // server.get('/:roomname', function (req, res) {
+    //     console.log(req.originalUrl);
 
-
-        res.json({yo: req.originalUrl });
-    });
+    //     res.json({yo: req.originalUrl });
+    // });
 
     // server.get('/api/v1/samples/apple/:id', function (req, res) {
 

@@ -1,6 +1,9 @@
-<section>
+<section ng-controller="HomeController">
     <p>This is the static home page.  For now, there is no functionality on this page.  This is a sample of what a static page should be like.</p>
 
     <span>and this is how we create links to other pages:</span>
-    <a ui-sref="sandbox">component sandbox</a>
+    <div><a ui-sref="sandbox">component sandbox</a></div>
+
+    <div>The URL path used to get here: {{url}}</div>
+
 </section>
