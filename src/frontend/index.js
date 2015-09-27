@@ -17,6 +17,11 @@
             }
         }
 
+        var matttestpage = {
+            url: '/matttestpage',
+            templateUrl: '/components/matttestpage/test.html'
+        }
+
         var sandbox = {
             root: {
                 url: '/sandbox',
@@ -41,6 +46,7 @@
 
         $stateProvider
             .state('home', home.root)
+            .state('matttestpage', matttestpage)
             .state('sandbox', sandbox.root)
             .state('sandbox.componentcow', sandbox.componentcow)
             .state('sandbox.componentkitty', sandbox.componentkitty)
