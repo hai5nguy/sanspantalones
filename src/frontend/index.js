@@ -16,6 +16,13 @@
                 templateUrl: '/components/home/home.html'
             }
         }
+        
+        var marcusfirstpage = {
+        	root: {
+        		url: '/s/myfirstpage',
+        		templateUrl: '/components/marcusfirstpage/testpage.html'
+        	}
+        }
 
         var matttestpage = {
             url: '/matttestpage',
@@ -46,6 +53,7 @@
 
         $stateProvider
             .state('home', home.root)
+            .state('testpage', marcusfirstpage.root)
             .state('matttestpage', matttestpage)
             .state('sandbox', sandbox.root)
             .state('sandbox.componentcow', sandbox.componentcow)
