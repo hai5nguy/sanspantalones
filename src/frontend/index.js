@@ -29,6 +29,11 @@
             templateUrl: '/components/matttestpage/test.html'
         }
 
+        var puppychow = {
+            url: '/s/puppychow',
+            templateUrl: '/components/puppychow/puppychow.html'
+        }
+
         var sandbox = {
             root: {
                 url: '/sandbox',
@@ -55,6 +60,7 @@
             .state('home', home.root)
             .state('testpage', marcusfirstpage.root)
             .state('matttestpage', matttestpage)
+            .state('puppychow', puppychow)
             .state('sandbox', sandbox.root)
             .state('sandbox.componentcow', sandbox.componentcow)
             .state('sandbox.componentkitty', sandbox.componentkitty)
