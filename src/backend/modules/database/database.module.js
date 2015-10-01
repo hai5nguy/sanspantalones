@@ -10,8 +10,10 @@ Sample Data Flow:
 
 var Q                   = require(SP_NODE_MODULES + 'q');
 // var _                   = require(LL_NODE_MODULES_DIR + 'underscore');
+// 
+var Apple               = require('./apple.js');
+var Message             = require('./message.js');
 
-var APPLE_COLLECTION = 'apples'
 
 module.exports  = {
     Fruits: Fruits()
@@ -20,29 +22,8 @@ module.exports  = {
 
 function Fruits() {
     return {
-        Apple: Apple()
-    }
-
-    function Apple() {
-
-        return {
-            create: PROMISIFY(create)
-            // read: PROMISIFY(read)
-        }
-
-        function create(args, resolve, reject) {
-            DB_SERVER.collection(APPLE_COLLECTION).insertOne({ name: args.name }, function (error, result) {
-                console.log('error ', error);
-                console.log('result ', result);
-
-                if (!error) {
-                    resolve(result[0]);
-                } else {
-                    reject(error);
-                }
-            });
-        }
-
+        Apple: Apple(),
+        Message: Message()
     }
 }
 

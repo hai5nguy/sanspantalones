@@ -5,9 +5,9 @@
 
     app.controller('PuppyChowController', PuppyChowController);
 
-    PuppyChowController.$inject = [ '$scope', '$element' ];  //this is need for minification to work
+    PuppyChowController.$inject = [ '$scope', '$element', 'MessageService' ];  //this is need for minification to work
 
-    function PuppyChowController($scope, $element) {
+    function PuppyChowController($scope, $element, MessageService) {
 
         $scope.onChatKeyPress = function (e) {
             //debugger;
@@ -19,6 +19,8 @@
             // console.log(e);
 
             if (e.keyCode == 13) {
+
+                debugger;
                 var message = $element.find('.chatinput').val();
                 // console.log(message);
                 // 
