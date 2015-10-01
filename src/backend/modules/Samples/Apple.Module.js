@@ -12,7 +12,7 @@ Sample Data Flow:
 
 var Q           = require(SP_NODE_MODULES + 'q');
 
-var Database    = require(SP_MODULES_FOLDER + 'Database.Module.js');
+var Database    = require(SP_MODULES_FOLDER + 'database.module.js');
 
 
 /*

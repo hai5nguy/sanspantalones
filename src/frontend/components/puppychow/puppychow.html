@@ -1,7 +1,5 @@
-<div>
-    <p>This is the chatlog:<p>
-    <div id="chatlog">
-
-    </div>
-    <textarea></textarea>
+<div ng-controller="PuppyChowController">
+    <p>This is the chatlog:</p>
+    <div class="chatlog"></div>
+    <input class="chatinput" type="textbox" ng-keypress="onChatKeyPress($event)"></input>
 </div>

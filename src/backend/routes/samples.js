@@ -7,7 +7,7 @@ All routes must be required in into routes.js for them to attach to express.
 */
 
 var Q           = require(SP_NODE_MODULES + 'q');
-var AppleModule = require(SP_MODULES_FOLDER + 'Samples/Apple.Module.js');
+var AppleModule = require(SP_MODULES_FOLDER + 'Samples/apple.module.js');
 
 module.exports = function (server) {
 
