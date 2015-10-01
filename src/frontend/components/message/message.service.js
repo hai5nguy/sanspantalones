@@ -10,10 +10,15 @@
     function MessageService($http, $q) {
 
         return {
+            get: getMessageFromServer,
             post: postMessageToServer
         }
 
-        function postMessageToServer() {
+        function getMessageFromServer(args) {
+            return $http.get('/api/v1/message')
+        }
+
+        function postMessageToServer(message) {
             return $http.post('/api/v1/message', message);    
         }
 

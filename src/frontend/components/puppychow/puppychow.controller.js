@@ -10,31 +10,25 @@
     function PuppyChowController($scope, $element, MessageService) {
 
         $scope.onChatKeyPress = function (e) {
-            //debugger;
-            // var llama = $compile('<sp-component-llama></sp-component-llama>')($scope.$new());
-            // $element.find('#llama-container').append(llama);
-            // 
-            // 
-            // console.log($element.find('.chatinput'));
-            // console.log(e);
 
             if (e.keyCode == 13) {
 
-                debugger;
-                var message = $element.find('.chatinput').val();
-                // console.log(message);
-                // 
-                MessageService.post({ message: message }).then(function () {
-                    
-                    debugger;
-                }, function () {
-                    console.error('Unable to post message');
-                    debugger;
+                var chatinput = $element.find('.chatinput');
+                var message = chatinput.val();
+                chatinput.val('');
+                
+                MessageService.post({ message: message }).then(function (result) {
+                    var savedMessage = result.data;
+                    var messageHtml = '<p><span>' + savedMessage._id + '</span> : <span>' + savedMessage.message + '</span></p>';
+                    $('.chatlog').append($(messageHtml));
+                }, function (error) {
+                    var messageHtml = '<p>Something went terribly wrong with message posting</p>';
+                    $('.chatlog').append($(messageHtml));
+                    console.error(error);
                 });
 
 
             }
-            // if (e.keyCode)
 
             
         }

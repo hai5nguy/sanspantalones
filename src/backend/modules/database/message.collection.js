@@ -8,13 +8,13 @@ module.exports = function (args) {
     }
 
     function create(args, resolve, reject) {
-        DB_SERVER.collection(MESSAGE_COLLECTION_NAME).insertOne({ name: args.name }, function (error, result) {
-            if (!error) {
-                resolve(result[0]);
-            } else {
-                reject(error);
-            }
+
+        DB_SERVER.collection(MESSAGE_COLLECTION_NAME).insertOne({ message: args.message }).then(function (result) {
+            resolve(result.ops[0]);
+        }, function (error) {
+            reject(error);
         });
+
     }
 
 }

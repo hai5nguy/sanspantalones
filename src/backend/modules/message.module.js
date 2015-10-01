@@ -12,11 +12,9 @@ module.exports = function (args) {
 
     function create(args, resolve, reject) {
 
-        Database.Message.create({ message: args.message }).then(function (result) {
-            if (result && result.length) {
-                self.set(result[0]);
-                resolve();
-            }
+        Database.Message.create({ message: args.message }).then(function (newMessage) {
+            self.set(newMessage);
+            resolve();
         }, function (err) {
             self.error = {
                 message: 'Something went terribly wrong with the database module.',

@@ -14,6 +14,7 @@ server.use(bodyParser.urlencoded({ extended: true }));                  // to su
 require('./routes/routes.js')(server);
 
 if (SP_ENVIRONMENT === 'local') {
+    require('./debug.js');
     server.use('/bower_components', express.static(config.folder.bower));
     server.use('/img', express.static(config.folder.img));              
 }

@@ -80,13 +80,3 @@ global.cage = function() {
     console.log('FFFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCKKKKKKKKKKKKKKKKKKKKKKK!!!!!!!!!!!');
     console.log('FFFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCKKKKKKKKKKKKKKKKKKKKKKK!!!!!!!!!!!');
 }
-
-
-function isTrackingFunctionality(functionality) {
-    var activeTracks = _.where(tracks, { active: true });
-    if (!activeTracks || !activeTracks.length) return false;
-    for (var i = 0; i < activeTracks.length; i++) {
-        if (activeTracks[i].functionalities.indexOf(functionality) >= 0) return true;
-    }
-    return false;
-}

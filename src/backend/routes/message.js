@@ -7,7 +7,7 @@ module.exports = function (server) {
 
         var message = new MessageModule();
 
-        message.create(req.body.message).then(function () {
+        message.create({ message: req.body.message }).then(function () {
             res.json(message.get());
         }, function () {
             res.status(500).send(message.error);
