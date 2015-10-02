@@ -5,6 +5,6 @@ All routes that want to be attached to express must be required in here.
  */
 
 module.exports = function (server) {
-    require('./message.js')(server);
-    require('./samples.js')(server);
+    require('./message.route.js')(server);
+    require('./samples.route.js')(server);
 }

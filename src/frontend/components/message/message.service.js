@@ -15,7 +15,18 @@
         }
 
         function getMessageFromServer(args) {
-            return $http.get('/api/v1/message')
+            return $q(function (resolve, reject) {
+                $http.get('/api/v1/message', { 
+                    params: {
+                        page: args.page,
+                        size: args.size
+                    }
+                }).then(function (response) {
+                    resolve(response.data);
+                }, function (error) {
+                    reject(error);
+                });
+            });
         }
 
         function postMessageToServer(message) {
