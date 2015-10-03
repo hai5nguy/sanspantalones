@@ -1,8 +1,9 @@
 var gulp = require('gulp');
+require('del');
 
 gulp.task('default', startLocalEnvironment);
 
-gulp.task('build-dev', deployToDev);
+gulp.task('build-dev', buildDev);
 
 function startLocalEnvironment(cb) {
     require('./gulp/local/tasks.js');
@@ -10,11 +11,20 @@ function startLocalEnvironment(cb) {
     cb();
 }
 
-function deployToDev(cb) {
+function buildDev(cb) {
     require('./gulp/build-dev.js');
     gulp.start('build-for-sanspantalonesdev');
     cb();
 }
+
+// function buildDev(cb) {
+//     del(['./gulp/dist/**', '!./gulp/dist'], { force: true }).then(function () {
+//         cb();
+//     }, function (error) {
+//         cb(error);
+//     });
+
+// }
 
 
 

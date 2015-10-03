@@ -7,17 +7,22 @@ var wiredep         = require('wiredep').stream;
 var angularFilesort = require('gulp-angular-filesort');
 
 
-var DIST = '../dist/';
-var FRONTEND = '../src/frontend/';
+var DIST = './dist/';
+var FRONTEND = './src/frontend/';
 
-gulp.task('build-for-sanspantalonesdev', [ 'sass', 'inject' ]);
+gulp.task('build-for-sanspantalonesdev', [ 'sass', 'inject', 'image' ]);
+// gulp.task('build-for-sanspantalonesdev', [ 'clean' ]);
 
 gulp.task('sass', [ 'copy' ], processSassFiles);
 gulp.task('inject', [ 'copy' ], injectIntoIndex);
+gulp.task('image', [ 'copy' ], processImages);
 
 gulp.task('copy', [ 'clean' ], copyFilesToDist);
 
 gulp.task('clean', wipeDistributionFolder);
+
+
+/* sass ******************************************************************/
 
 function processSassFiles() {
     return gulp.src(FRONTEND + 'sass/style.scss')
@@ -62,6 +67,15 @@ function injectIntoIndex() {
 
 }
 
+/* images ***************************************************************/
+
+function processImages() {
+
+    return gulp.src(FRONTEND + 'img/**')
+        .pipe(gulp.dest(DIST + 'img/'));
+
+}
+
 /* copy *****************************************************************/
 
 function copyFilesToDist() {
@@ -77,12 +91,8 @@ function copyFilesToDist() {
         .pipe(gulp.dest(DIST))
 }
 
-function wipeDistributionFolder(cb) {
-    del(['../dist/**', '!../dist']).then(function () {
-        cb();
-    }, function (error) {
-        cb(error);
-    });
+function wipeDistributionFolder() {
+    return del(['./dist/**', '!./dist']);
 }
 
 
