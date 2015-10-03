@@ -16,18 +16,21 @@
         function onChatKeyPress(e) {
             if (e.keyCode == 13) {
 
-                var chatinput = $element.find('.chatinput');
-                var message = chatinput.val();
-                chatinput.val('');
+                var chatInput = $element.find('.chatinput');
+                var chatText = chatInput.val();
+                chatInput.val('');
                 
-                MessageService.post({ message: message }).then(function (result) {
+                MessageService.post({ text: chatText }).then(function (result) {
                     // var savedMessage = result.data;
                     // var messageHtml = '<p><span>' + savedMessage._id + '</span> : <span>' + savedMessage.message + '</span></p>';
                     // $('.chatlog').append($(messageHtml));
+                    // 
+                    loadChatLog();
+                    
                 }, function (error) {
                 //     var messageHtml = '<p>Something went terribly wrong with message posting</p>';
                 //     $('.chatlog').append($(messageHtml));
-                //     console.error(error);
+                    console.error(error);
                 });
             }
         }
@@ -35,11 +38,11 @@
 
         function loadChatLog() {
 
-            MessageService.get({ page: 1, size: 50 }).then(function (messages) {
-                debugger;
+            MessageService.get({ page: 1, size: 10 }).then(function (messages) {
+                // debugger;
                 $scope.messages = messages;
             }, function (error) {
-                debugger;
+                // debugger;
                 console.error('can not get chatlog');
             });
         }

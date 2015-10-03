@@ -12,7 +12,7 @@ module.exports = function (args) {
 
     function create(args, resolve, reject) {
 
-        Database.Message.create({ message: args.message }).then(function (newMessage) {
+        Database.Message.create({ text: args.text }).then(function (newMessage) {
             self.set(newMessage);
             resolve();
         }, function (err) {
@@ -25,4 +25,30 @@ module.exports = function (args) {
     }
 
     return self;
+}
+
+module.exports.Collection = function(args) {
+    var args = args || {};
+    var collection = new BASECOLLECTION(args.initialItems);
+    collection.req = args.req;
+
+    collection.load = PROMISIFY(load);
+    
+
+    function load(args, resolve, reject) {
+
+        Database.Message.read({ page: args.page, size: args.size }).then(function (messages) {
+            collection.set(messages);
+            resolve();
+        }, function (db_error) {
+            collection.error = {
+                message: 'Unable to load messages from database',
+                database_error: db_error
+            };
+            reject();
+        });
+
+    }
+
+    return collection;
 }

@@ -4,42 +4,22 @@ var MessageModule   = require(SP_MODULES_FOLDER + 'message.module.js');
 module.exports = function (server) {
 
     server.get('/api/v1/message', function (req, res) {
-        // var messages = new MessageModule.Collection();
 
-        // var loadArgs = {
-        //     page: req.query.page,
-        //     size: req.query.size
-        // }
-        // 
+        var messages = new MessageModule.Collection({ req: req });
+
+        messages.load({ page: req.query.page, size: req.query.size }).then(function () {
+            res.json(messages.get());
+        }, function () {
+            res.status(500).send(messages.error);
+        });
         
-
-        // messages.load({ page: req.query.id, size: req.query.size }).then(function () {
-        //     t();
-
-
-
-        // }, function () {
-        //     t();
-        // });
-        // 
-        // 
-        d(req.query);
-
-        res.json([
-            { _id: 1, text: 'one' },
-            { _id: 2, text: 'two' },
-            { _id: 3, text: 'three' },
-            { _id: 4, text: 'four' },
-            { _id: 5, text: 'five' },
-        ]);
-
     });
 
     server.post('/api/v1/message', function (req, res) {
 
-        var message = new MessageModule();
+        var message = new MessageModule({ req: req });
 
-        message.create({ message: req.body.message }).then(function () {
+        message.create({ text: req.body.text }).then(function () {
             res.json(message.get());
         }, function () {
             res.status(500).send(message.error);
