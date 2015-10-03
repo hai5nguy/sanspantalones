@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hai5nguy/sanspantalones",
   "dependencies": {
     "body-parser": "^1.13.3",
+    "bower": "^1.5.3",
     "express": "^4.13.3",
     "mongodb": "^2.0.43",
     "q": "^1.4.1",
