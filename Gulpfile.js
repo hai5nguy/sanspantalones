@@ -17,14 +17,4 @@ function buildDev(cb) {
     cb();
 }
 
-// function buildDev(cb) {
-//     del(['./gulp/dist/**', '!./gulp/dist'], { force: true }).then(function () {
-//         cb();
-//     }, function (error) {
-//         cb(error);
-//     });
-
-// }
-
-
 
