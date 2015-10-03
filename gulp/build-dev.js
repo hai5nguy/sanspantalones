@@ -1,30 +1,16 @@
 var gulp            = require('gulp');
-// var gls             = require('gulp-live-server');
 var del             = require('del');
-// var watch           = require('gulp-watch');
 var sass            = require('gulp-sass');
-// var concat          = require('gulp-concat');
 var inject          = require('gulp-inject');
 var replace         = require('gulp-replace');
 var wiredep         = require('wiredep').stream;
 var angularFilesort = require('gulp-angular-filesort');
-// var exec            = require('child_process').exec;
-
-var config          = require('./gulp.config.dev.js');
-
-// var server;
-
-// /***/
-gulp.task('deploy-dev', [ 'build' ], deployToHeroku);
 
 
-var DIST = '../../dist/';
-var FRONTEND = '../../src/frontend/';
+var DIST = '../dist/';
+var FRONTEND = '../src/frontend/';
 
-// gulp.task('watch', [ 'build'], watchForSourceChanges );
-// gulp.task('mongo', startMongo);
-
-gulp.task('build', [ 'sass', 'inject' ]);
+gulp.task('build-dev', [ 'sass', 'inject' ]);
 
 gulp.task('sass', [ 'copy' ], processSassFiles);
 gulp.task('inject', [ 'copy' ], injectIntoIndex);

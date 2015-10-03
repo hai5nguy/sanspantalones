@@ -11,8 +11,8 @@ function startLocalEnvironment(cb) {
 }
 
 function deployToDev(cb) {
-    require('./gulp/dev/tasks.js');
-    start.start('deploy-dev');
+    require('./gulp/build-dev.js');
+    start.start('build-dev');
     cb();
 }
 
