@@ -5,7 +5,6 @@
 ### Install and Run
 
     npm install
-    bower update
     gulp
 
 Browse to
