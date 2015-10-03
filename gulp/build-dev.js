@@ -10,7 +10,7 @@ var angularFilesort = require('gulp-angular-filesort');
 var DIST = '../dist/';
 var FRONTEND = '../src/frontend/';
 
-gulp.task('build-dev', [ 'sass', 'inject' ]);
+gulp.task('build-for-sanspantalonesdev', [ 'sass', 'inject' ]);
 
 gulp.task('sass', [ 'copy' ], processSassFiles);
 gulp.task('inject', [ 'copy' ], injectIntoIndex);
@@ -78,7 +78,7 @@ function copyFilesToDist() {
 }
 
 function wipeDistributionFolder(cb) {
-    del(['./dist/**', '!./dist']).then(function () {
+    del(['../dist/**', '!../dist']).then(function () {
         cb();
     }, function (error) {
         cb(error);

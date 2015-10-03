@@ -2,7 +2,7 @@ var gulp = require('gulp');
 
 gulp.task('default', startLocalEnvironment);
 
-gulp.task('deploy-dev', deployToDev);
+gulp.task('build-dev', deployToDev);
 
 function startLocalEnvironment(cb) {
     require('./gulp/local/tasks.js');
@@ -12,7 +12,7 @@ function startLocalEnvironment(cb) {
 
 function deployToDev(cb) {
     require('./gulp/build-dev.js');
-    start.start('build-dev');
+    gulp.start('build-for-sanspantalonesdev');
     cb();
 }
 
