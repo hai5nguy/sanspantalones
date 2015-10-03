@@ -10,7 +10,7 @@ var wiredep         = require('wiredep').stream;
 var angularFilesort = require('gulp-angular-filesort');
 var exec            = require('child_process').exec;
 
-var config          = require('./gulp-config.js');
+var config          = require('./config.js');
 
 var server;
 
