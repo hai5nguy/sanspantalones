@@ -20,7 +20,7 @@
         var marcusfirstpage = {
         	root: {
         		url: '/s/myfirstpage',
-        		templateUrl: '/components/marcusfirstpage/testpage.html'
+        		templateUrl: '/components/marcusfirstpage_nocaps/testpage.html'
         	}
         }
 
