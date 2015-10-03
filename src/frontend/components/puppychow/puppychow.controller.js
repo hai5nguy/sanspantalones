@@ -38,9 +38,9 @@
 
         function loadChatLog() {
 
-            MessageService.get({ page: 1, size: 10 }).then(function (messages) {
+            MessageService.get({ page: 1, size: 50 }).then(function (messages) {
                 // debugger;
-                $scope.messages = messages;
+                $scope.messages = messages.reverse();
             }, function (error) {
                 // debugger;
                 console.error('can not get chatlog');

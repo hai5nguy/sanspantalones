@@ -9,7 +9,13 @@ module.exports = function (args) {
     }
 
     function create(args, resolve, reject) {
-        DB_SERVER.collection(MESSAGE_COLLECTION_NAME).insertOne({ text: args.text }).then(function (result) {
+
+        var messageDocument = {
+            created: new Date(),
+            text: args.text
+        };
+
+        DB_SERVER.collection(MESSAGE_COLLECTION_NAME).insertOne(messageDocument).then(function (result) {
             resolve(result.ops[0]);
         }, function (error) {
             reject(error);
@@ -25,6 +31,7 @@ module.exports = function (args) {
         var skip = (page - 1) * limit;
 
         messageCollection.find({})
+            .sort({'created': -1})
             .skip(skip)
             .limit(limit)
             .toArray()
