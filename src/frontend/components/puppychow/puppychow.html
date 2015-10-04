@@ -1,8 +1,11 @@
 <div ng-controller="PuppyChowController">
-    <div>
-        <div ng-repeat="message in messages">
-            <p>({{ message.created | date : 'medium' }}) {{message._id}} : {{message.text}}</p>
+    <div id="chatContainer">
+        <div ng-repeat="message in messages" class="message">
+            <span class="dateTime">{{ message.created | date : 'medium' }}</span>
+            <span class="userIcon"></span>
+            <span class="userName">UserName:</span>
+            <span id="{{message._id}}" class="content">{{message.text}}</span>
         </div>
     </div>
-    <input class="chatinput" type="textbox" ng-keypress="onChatKeyPress($event)"></input>
+    <input class="chatInput" type="textbox" ng-keypress="onChatKeyPress($event)" placeholder="Type here. Press Enter to send." />
 </div>
