@@ -11,7 +11,6 @@ var DIST = './dist/';
 var FRONTEND = './src/frontend/';
 
 gulp.task('build-for-sanspantalonesdev', [ 'sass', 'inject', 'image' ]);
-// gulp.task('build-for-sanspantalonesdev', [ 'clean' ]);
 
 gulp.task('sass', [ 'copy' ], processSassFiles);
 gulp.task('inject', [ 'copy' ], injectIntoIndex);

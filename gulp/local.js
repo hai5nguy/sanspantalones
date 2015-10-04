@@ -10,12 +10,16 @@ var wiredep         = require('wiredep').stream;
 var angularFilesort = require('gulp-angular-filesort');
 var exec            = require('child_process').exec;
 
-var config          = require('./config.js');
+var SRC = './src/'
+var DIST = './dist/'
+
+var BACKEND = SRC + 'backend/'
+var FRONTEND = SRC + 'frontend/';
 
 var server;
 
 /***/
-gulp.task('local', [ 'watch', 'mongo' ], startServer);
+gulp.task('start-local-environment', [ 'watch', 'mongo' ], startServer);
 
 gulp.task('watch', [ 'build'], watchForSourceChanges );
 gulp.task('mongo', startMongo);
@@ -35,7 +39,7 @@ gulp.task('rebuild', [ 'build'], notifyServer);
 /* local ****************************************************************/
 
 function startServer(cb) {
-    server = gls.new(config.backend.server);
+    server = gls.new(BACKEND + 'server.js');
     server.start().then(function (result) {
         if (result && result.code === 1) {
             killLiveReloadServerIfRunning();
@@ -49,11 +53,11 @@ function startServer(cb) {
 }
 
 function watchForSourceChanges() {
-    watch(config.frontend.root + '**/*', function (event) {
+    watch(FRONTEND + '**/*', function (event) {
         gulp.start('rebuild');
     });
 
-    watch(config.backend.root + '**/*', function (event) {
+    watch(BACKEND + '**/*', function (event) {
         console.log('Backend changes detected, restarting server...');
         server.stop().then(function () {
             startServer();
@@ -62,7 +66,7 @@ function watchForSourceChanges() {
 
 }
 function notifyServer() {
-    return gulp.src(config.dist.index).pipe(server.notify());
+    return gulp.src(DIST + 'index.html').pipe(server.notify());
 }
 
 
@@ -89,9 +93,9 @@ function startMongo(cb) {
 /* sass *****************************************************************/
 
 function processSassFiles() {
-    return gulp.src(config.sass.scss)
+    return gulp.src(FRONTEND + 'sass/style.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(config.dist.root));
+        .pipe(gulp.dest(DIST));
 }
 
 /* inject ***************************************************************/
@@ -100,12 +104,12 @@ function injectIntoIndex() {
     var d = new Date();
     var timestamp = d.valueOf();
 
-    return gulp.src(config.frontend.index)
+    return gulp.src(FRONTEND + 'index.html')
         .pipe(injectBower())
         .pipe(injectAngular())
         .pipe(injectLiveReload())
         .pipe(injectStyleSheetLink())
-        .pipe(gulp.dest(config.dist.root));
+        .pipe(gulp.dest(DIST));
 
 
     function injectBower() {
@@ -115,7 +119,7 @@ function injectIntoIndex() {
     }
 
     function injectAngular() {
-        var angularFiles = gulp.src(config.frontend.root + '**/*.js').pipe(angularFilesort());
+        var angularFiles = gulp.src(FRONTEND + '**/*.js').pipe(angularFilesort());
         return inject(angularFiles, {
             name: 'angular',
             ignorePath: '/src/frontend/'
@@ -139,13 +143,19 @@ function injectIntoIndex() {
 /* copy *****************************************************************/
 
 function copyFilesToDist() {
+    var sources = [
+        FRONTEND + '**/*.js' ,
+        FRONTEND + '**/*.html',
+        '!' + FRONTEND + 'index.html'  //moved by inject task
+    ];
+
     return gulp
-        .src(config.move.source, { base: config.frontend.root })
-        .pipe(gulp.dest(config.dist.root))
+        .src(sources, { base: FRONTEND })
+        .pipe(gulp.dest(DIST))
 }
 
 function wipeDistributionFolder(cb) {
-    del(config.del.target).then(function () {
+    del(['./dist/**', '!./dist']).then(function () {
         cb();
     }, function (error) {
         cb(error);

@@ -5,7 +5,6 @@
 ### Install and Run
 
     npm install
-    gulp
 
 Browse to
 

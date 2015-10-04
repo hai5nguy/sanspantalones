@@ -64,7 +64,11 @@
             .state('sandbox', sandbox.root)
             .state('sandbox.componentcow', sandbox.componentcow)
             .state('sandbox.componentkitty', sandbox.componentkitty)
-            .state('debug', debug.root);
+            .state('debug', debug.root)
+            .state('urlcheck', {
+                url: '/??*',
+                templateUrl: '/components/urlcheck/urlcheck.html'
+            });
 
         $urlRouterProvider.otherwise('/');
         
