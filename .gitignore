@@ -30,3 +30,4 @@ scratch/
 .idea/
 localdb/db/
 !localdb/db/placeholder.txt
+dist/
