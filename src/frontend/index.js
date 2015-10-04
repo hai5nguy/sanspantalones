@@ -5,7 +5,6 @@
         .module('app', ['ui.router'])
         .config(appConfiguration);
 
-
     function appConfiguration($stateProvider, $urlRouterProvider, $locationProvider) {
             
         $locationProvider.html5Mode(true);
@@ -65,9 +64,9 @@
             .state('sandbox.componentcow', sandbox.componentcow)
             .state('sandbox.componentkitty', sandbox.componentkitty)
             .state('debug', debug.root)
-            .state('urlcheck', {
-                url: '/??*',
-                templateUrl: '/components/urlcheck/urlcheck.html'
+            .state('roomcheck', {
+                url: '/:path',
+                templateUrl: '/components/room/room.html'
             });
 
         $urlRouterProvider.otherwise('/');
