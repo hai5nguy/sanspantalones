@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <title>Awesums Chat</title>
+
+    <base href="/">  <!-- required for $locationProvider.html5mode(true); -->
+
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <!-- endbower -->
+
+    <!-- angular:js -->
+    <script src="/index.js"></script>
+    <script src="/components/sandbox/componentkitty/componentkitty.controller.js"></script>
+    <script src="/components/sandbox/componentllama/componentllama.directive.js"></script>
+    <script src="/components/sandbox/sandbox.controller.js"></script>
+    <script src="/components/puppychow/puppychow.controller.js"></script>
+    <script src="/components/message/message.service.js"></script>
+    <script src="/components/debug/reload-timer.js"></script>
+    <script src="/components/debug/debug.controller.js"></script>
+    <!-- endinject -->
+
+    <!-- bower:css -->
+    <!-- endbower -->
+
+    <link type="text/css" rel="stylesheet" href="style.css?v=1443975241891"></link>
+
+</head>
+<body>
+    <div ui-view></div>
+
+    <script src="//localhost:35729/livereload.js?v=1443975241891"></script>
+</body>
+</html>

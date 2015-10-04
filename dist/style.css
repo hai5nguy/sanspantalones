@@ -1,0 +1,29 @@
+/* main.sass - the global style sheet */
+body {
+  background: #eef; }
+
+/*  styling for index */
+/* components styles */
+/* styles for components/sandbox */
+.sandbox .kitty {
+  margin-left: 20px; }
+
+.sandbox .test-image img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid gray; }
+
+/* styling for componentcow */
+.componentcow {
+  background: teal;
+  border: 1px solid black; }
+
+/* styling for component kitty */
+.componentkitty {
+  background: orange;
+  border: 1px solid black; }
+  .componentkitty.clicked {
+    background: white; }
+
+.componentllama {
+  border: 1px solid blue; }
