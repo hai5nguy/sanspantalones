@@ -1,3 +1,9 @@
 <div ng-controller="RoomController">
-    The room name: {{name}}
+    <h3>The room name: {{name}}</h3>
+    <div>
+        <div ng-repeat="message in messages">
+            <p>({{ message.created | date : 'medium' }}) {{message._id}} : {{message.text}}</p>
+        </div>
+    </div>
+    <input class="chatinput" type="textbox" ng-keypress="onChatKeyPress($event)"></input>
 </div>
