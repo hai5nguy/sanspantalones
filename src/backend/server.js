@@ -10,15 +10,17 @@ require('./mongo.js');
 var config = require('./server-config.js');
 
 var server = express();
+
 var MongoClient = require('mongodb').MongoClient;
 var MongoStore = require('connect-mongo')(session);
 server.use(bodyParser.json());                                          // to support JSON-encoded bodies
 server.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
 server.use(cookieParser('nopants'));
 
+//add sessions and store to mongodb
 server.use(session({
   secret: "nopants",
-  cookie: {maxAge: 6000000},
+  cookie: {maxAge: 60*60*1000},  //1 hr expiration
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({ db: 'sanspantalones', host: 'localhost', port: 27017, collection: 'sessions', autoreconnect: true })
