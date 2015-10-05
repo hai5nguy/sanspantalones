@@ -1,5 +1,5 @@
 /* sole purpose of this script is for debugging purpose, it shows a "Page reloaded: x seconds ago"
-on the lower right hand corder
+on the lower right hand corner
 */
 
 (function () {
