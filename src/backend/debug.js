@@ -1,3 +1,5 @@
+if (SP_ENVIRONMENT !== 'local') return;
+
 var _           = require(SP_NODE_MODULES + 'underscore');
 var prettyjson  = require(SP_NODE_MODULES + 'prettyjson');
 

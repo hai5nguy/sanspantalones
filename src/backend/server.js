@@ -1,28 +1,42 @@
-var express     = require('express');
+var Express     = require('express');
 var bodyParser  = require('body-parser');
 
+
+var express = Express();
+
+var http = require('http');
+
+var server = http.createServer(express);
+var io = require('socket.io')(server);
+
+
+
 require('./globals.js');  //must be first
+require('./debug.js');
 require('./core.js');
 require('./mongo.js');
 var config = require('./server-config.js');
 
-var server = express();
 
-server.use(bodyParser.json());                                          // to support JSON-encoded bodies
-server.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
+express.use(bodyParser.json());                                          // to support JSON-encoded bodies
+express.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
 
-require('./routes/routes.js')(server);
+require('./routes/routes.js')(express);
+require('./socket/socket.js')(express);
+
 
 if (SP_ENVIRONMENT === 'local') {
-    require('./debug.js');
-    server.use('/img', express.static(config.folder.img));              
+    express.use('/img', Express.static(config.folder.img));              
 }
 
-server.use('/bower_components', express.static(config.folder.bower));   //i need someone to look into CDN with this as being fall back
+express.get('/', config.route.index);
 
-//this must be last!!!!!
-server.use('/', express.static(config.folder.dist));
-server.use('/*', express.static(config.file.index));                    //this is needed to remove hash from url
+
+express.use(Express.static(config.folder.dist));
+express.use('/bower_components', Express.static(config.folder.bower));   //i need someone to look into CDN with this as being fall back
+
+
+express.get('*', config.route.index);
 
 server.listen(SP_PORT, function () {
     console.log('Server online. Port:', SP_PORT, ' Environment:', SP_ENVIRONMENT);
