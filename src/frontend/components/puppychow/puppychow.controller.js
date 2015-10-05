@@ -16,7 +16,7 @@
         function onChatKeyPress(e) {
             if (e.keyCode == 13) {
 
-                var chatInput = $element.find('.chatinput');
+                var chatInput = $element.find('.chatInput');
                 var chatText = chatInput.val();
                 chatInput.val('');
                 
