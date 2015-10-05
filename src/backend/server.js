@@ -2,11 +2,13 @@ var express     = require('express');
 var bodyParser  = require('body-parser');
 var cookieParser= require('cookie-parser');
 var session = require('express-session');
+var passport = require('passport');
 
 
 require('./globals.js');  //must be first
 require('./core.js');
 require('./mongo.js');
+require('./passport.js')(passport);
 var config = require('./server-config.js');
 
 var server = express();
@@ -25,6 +27,9 @@ server.use(session({
   saveUninitialized: true,
   store: new MongoStore({ db: 'sanspantalones', host: 'localhost', port: 27017, collection: 'sessions', autoreconnect: true })
 }));
+
+server.use(passport.initialize());
+server.use(passport.session());
 
 require('./routes/routes.js')(server);
 
