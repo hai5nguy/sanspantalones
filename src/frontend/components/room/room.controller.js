@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('RoomController', RoomController);
 
-    RoomController.$inject = [ '$scope', '$element', '$compile', '$stateParams', 'MessageService', 'SocketService' ];  //this is need for minification to work
+    RoomController.$inject = [ '$scope', '$element', '$compile', '$stateParams', 'MessageService' ];  //this is need for minification to work
 
-    function RoomController($scope, $element, $compile, $stateParams, MessageService, SocketService) {
+    function RoomController($scope, $element, $compile, $stateParams, MessageService) {
 
         // console.log($stateParams);
         // debugger;

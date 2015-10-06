@@ -1,14 +1,9 @@
-var Express     = require('express');
+var express     = require('express');
 var bodyParser  = require('body-parser');
+var http        = require('http');
 
-
-var express = Express();
-
-var http = require('http');
-
-var server = http.createServer(express);
-var io = require('socket.io')(server);
-
+var app = express();
+var server = http.createServer(app);
 
 
 require('./globals.js');  //must be first
@@ -17,26 +12,25 @@ require('./core.js');
 require('./mongo.js');
 var config = require('./server-config.js');
 
-
-express.use(bodyParser.json());                                          // to support JSON-encoded bodies
-express.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
-
-require('./routes/routes.js')(express);
-require('./socket/socket.js')(express);
+app.use(bodyParser.json());                                          // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
 
 
+require('./routes/routes.js')(app);
+
+
+app.use(express.static(config.folder.dist));
+app.use('/bower_components', express.static(config.folder.bower));   //i need someone to look into CDN with this as being fall back
 if (SP_ENVIRONMENT === 'local') {
-    express.use('/img', Express.static(config.folder.img));              
+    app.use('/img', express.static(config.folder.img));              
 }
 
-express.get('/', config.route.index);
+app.get('/', config.route.index);
+app.get('*', config.route.index);
 
 
-express.use(Express.static(config.folder.dist));
-express.use('/bower_components', Express.static(config.folder.bower));   //i need someone to look into CDN with this as being fall back
+require('./modules/socket.js')(server);
 
-
-express.get('*', config.route.index);
 
 server.listen(SP_PORT, function () {
     console.log('Server online. Port:', SP_PORT, ' Environment:', SP_ENVIRONMENT);
