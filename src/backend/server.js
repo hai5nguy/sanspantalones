@@ -18,7 +18,7 @@ var config = require('./server-config.js');
 app.use(bodyParser.json());                                          // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
 
-var MongoStore  = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo')(session);
 app.use(cookieParser('nopants'));
 
 //add sessions and store to mongodb
