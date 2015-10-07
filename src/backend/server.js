@@ -46,7 +46,7 @@ app.get('/', config.route.index);
 app.get('*', config.route.index);
 
 
-require('./modules/socket.js')(server);
+require('./modules/socket.module.js')(server);
 
 
 server.listen(SP_PORT, function () {

@@ -4,9 +4,9 @@
     angular.module('app')
         .controller('RoomController', RoomController);
 
-    RoomController.$inject = [ '$scope', '$element', '$compile', '$stateParams', 'MessageService' ];  //this is need for minification to work
+    RoomController.$inject = [ '$scope', '$element', '$compile', '$stateParams', 'MessageService', 'RoomService'];  //this is need for minification to work
 
-    function RoomController($scope, $element, $compile, $stateParams, MessageService) {
+    function RoomController($scope, $element, $compile, $stateParams, MessageService, RoomService) {
 
         // console.log($stateParams);
         // debugger;
@@ -18,7 +18,7 @@
         //     console.log(data);
         //     socket.emit('my other event', { my: 'data' });
         // });
-        debugger;
+        // debugger;
 
 
 
