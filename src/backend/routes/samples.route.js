@@ -9,9 +9,9 @@ All routes must be required in into routes.js for them to attach to express.
 var Q           = require(SP_NODE_MODULES + 'q');
 var AppleModule = require(SP_MODULES_FOLDER + 'samples/apple.module.js');
 
-module.exports = function (server) {
+module.exports = function (app) {
 
-    server.get('/api/v1/samples/apple/:id', function (req, res) {
+    app.get('/api/v1/samples/apple/:id', function (req, res) {
 
         var id = req.args.id;
 
@@ -25,7 +25,7 @@ module.exports = function (server) {
 
     });
     
-    server.get('/api/v1/samples/blah', function (req, res) {
+    app.get('/api/v1/samples/blah', function (req, res) {
 
         var apples = new AppleModule.Collection({
             req: req
@@ -39,7 +39,7 @@ module.exports = function (server) {
         
     });
 
-    server.post('/api/v1/samples/apple', function (req, res) {
+    app.post('/api/v1/samples/apple', function (req, res) {
 
         var apple = new AppleModule();
 

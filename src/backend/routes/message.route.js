@@ -1,9 +1,9 @@
 var Q               = require(SP_NODE_MODULES + 'q');
 var MessageModule   = require(SP_MODULES_FOLDER + 'message.module.js');
 
-module.exports = function (server) {
+module.exports = function (app) {
 
-    server.get('/api/v1/message', function (req, res) {
+    app.get('/api/v1/message', function (req, res) {
 
         var messages = new MessageModule.Collection({ req: req });
 
@@ -15,7 +15,7 @@ module.exports = function (server) {
         
     });
 
-    server.post('/api/v1/message', function (req, res) {
+    app.post('/api/v1/message', function (req, res) {
 
         var message = new MessageModule({ req: req });
 
