@@ -18,8 +18,7 @@ var config = require('./server-config.js');
 app.use(bodyParser.json());                                          // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({ extended: true }));                  // to support URL-encoded bodies
 
-var MongoClient = require('mongodb').MongoClient;
-var MongoStore = require('connect-mongo')(session);
+var MongoStore  = require('connect-mongo')(session);
 app.use(cookieParser('nopants'));
 
 //add sessions and store to mongodb
@@ -28,7 +27,7 @@ app.use(session({
   cookie: {maxAge: 60*60*1000},  //1 hr expiration
   resave: true,
   saveUninitialized: true,
-  store: new MongoStore({ db: 'sanspantalones', host: 'localhost', port: 27017, collection: 'sessions', autoreconnect: true })
+  store: new MongoStore({ url: SP_DB_CONNECTION_STRING, autoreconnect: true })
 }));
 
 app.use(passport.initialize());
