@@ -2,48 +2,55 @@
     'use strict';
 
     var app = angular.module('app');
+    app.factory('RoomService', RoomService);
 
+    RoomService.$inject = [ '$q' ];
 
-    app.factory('RoomService', function () {
+    function RoomService($q) {
 
         var self = {
-            join: join,
+            init: init,
+            onNewMessage: null,
             sendMessage: sendMessage
         }
 
-        var socket = io();
+        var _socket;
+        var _roomName;
 
-        socket.emit('hi', 'everyone');
+        function init(args) {
+            _roomName = args.roomName;
+            _socket =  io();
+            _socket.on('connect', function () {
+                _socket.emit('join', { roomName: _roomName });
+                console.log('join ', args);
+            });
 
+            _socket.on('join-success', function () {
+                console.log('join-success ');
+                _socket.on('new-chat', function (args) {
+                    console.log('new chat', args);
+                    if (typeof self.onNewMessage === 'function') {
+                        self.onNewMessage(args);
+                    }
+                });
 
-        function join(args) {
-            var name = args.name;
+            });
+
 
         }
 
-        socket.on('connect', function () {
-            socket.send('blah', 'blah2');
-            console.log('connect');
-        });
+        function sendMessage(messageText) {
+            _socket.emit('chat', { 
+                roomName: _roomName, 
+                text: messageText 
+            });
 
-
-        //         var socket = io();
-        // debugger;
-        // socket.on('news', function (data) {
-        //     console.log(data);
-        //     socket.emit('my other event', { my: 'data' });
-        // });
-
-        function sendMessage(args) {
-
-            socket.emit('hi', 'everyone');
+            //todo: implement error handling
 
         }
 
         return self;
-        
 
-
-    });
+    };
 
 })();

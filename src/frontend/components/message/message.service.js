@@ -5,7 +5,7 @@
 
     app.factory('MessageService', MessageService);
 
-    MessageService.$inject = [ '$http', '$q' ];  //this is need for minification to work
+    MessageService.$inject = [ '$http', '$q' ];  //this is needed for minification to work
 
     function MessageService($http, $q) {
 

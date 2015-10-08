@@ -5,10 +5,24 @@ module.exports = function (server) {
         console.log('new connection made');
         
 
-        socket.on('message', function (a,b,c) {
-            console.log('message ',a,b,c);
+        socket.on('join', function(args) {
+
+            var name = args.roomName;
+
+            console.log('join ', args);
+            socket.join(name);
+
+            socket.emit('join-success', {
+                roomName: name
+            });
+
         });
 
+        socket.on('chat', function (args) {
+            console.log('received chat: ', args);
+            // console.log(_roomName);
+            io.to(args.roomName).emit('new-chat', args );
+        });
 
         socket.on('disconnect', function(a,b,c) {
             console.log('disconnect');
@@ -16,6 +30,7 @@ module.exports = function (server) {
 
 
     });
+
 
 
     return {
