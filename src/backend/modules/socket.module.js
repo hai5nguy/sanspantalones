@@ -1,19 +1,30 @@
 module.exports = function (server) {
     var io = require('socket.io')(server);
     
-    // var http = require('http').Server(server);
-    // var io = require('socket.io')(http);
+    io.on('connection', function(socket) {
+        console.log('new connection made');
+        
 
-    io.on('connection', function(socket){
-        // console.log('new connection made');
-        socket.on('hi', function(data){
-            console.log('yo ', data);
-            // socket.emit('chat1', data);
+        socket.on('message', function (a,b,c) {
+            console.log('message ',a,b,c);
         });
+
+
+        socket.on('disconnect', function(a,b,c) {
+            console.log('disconnect');
+        });
+
+
     });
 
 
-    // // var app = require('express')();
-    // var a = require('http').Server(server);
-    // var io = require('socket.io')(a);
+    return {
+        addNewConnection: addNewConnection
+    }
+
+
+    function addNewConnection() {
+        var id = 1;
+    }
+
 }

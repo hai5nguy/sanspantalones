@@ -19,17 +19,19 @@
         //     socket.emit('my other event', { my: 'data' });
         // });
         // debugger;
-
-
-
-
-        $scope.name = $stateParams.path;
-
-        // $scope.test = function () {
-        //     var llama = $compile('<sp-component-llama></sp-component-llama>')($scope.$new());
-        //     $element.find('#llama-container').append(llama);
-        // }
         // 
+        
+        var roomName = $stateParams.path;
+
+        // RoomService.join({ name: roomName }).then(function (room) {
+        //     console.log('room ', room);
+        // }, function (error) {
+        //     console.error('roomservice.join', error);
+        // })
+
+
+        $scope.name = roomName;
+
         
         loadChatLog();
 
