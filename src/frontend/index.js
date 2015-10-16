@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app', ['ui.router'])
+        .module('app', ['ui.router', 'ngResource'])
         .config(appConfiguration);
 
     function appConfiguration($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -26,6 +26,11 @@
         var matttestpage = {
             url: '/matttestpage',
             templateUrl: '/components/matttestpage/test.html'
+        }
+        
+        var signin = {
+            url: '/signin',
+            templateUrl: '/components/signin/signin.html'
         }
 
         var puppychow = {

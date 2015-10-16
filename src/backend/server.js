@@ -42,9 +42,16 @@ if (SP_ENVIRONMENT === 'local') {
     app.use('/img', express.static(config.folder.img));              
 }
 
+app.get('/testing123', function(req, res){
+      if(!req.isAuthenticated()){
+      res.send("Not Authenticated");
+      }
+      else
+      res.send("Authenticated");
+})
+
 app.get('/', config.route.index);
 app.get('*', config.route.index);
-
 
 require('./modules/socket.module.js')(server);
 
