@@ -29,8 +29,17 @@
         }
         
         var signin = {
-            url: '/signin',
-            templateUrl: '/components/signin/signin.html'
+            root:{
+                url: '/signin',
+            templateUrl: '/components/login/login.html'
+            }
+        }
+        
+        var signup = {
+            root:{
+                url: '/signup',
+            templateUrl: '/components/signup/signup.html'
+            }
         }
 
         var puppychow = {
@@ -61,6 +70,8 @@
         }
 
         $stateProvider
+            .state('signin', signin.root)
+            .state('signup', signup.root)
             .state('home', home.root)
             .state('testpage', marcusfirstpage.root)
             .state('matttestpage', matttestpage)

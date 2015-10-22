@@ -34,7 +34,7 @@ module.exports = function(passport) {
             db.collection('users').findOne({'email': email},function(err, result){
                 if (err)
                     return done(err);
-                if (result.length) {
+                if (result) {
                     return done(null, false);
                 } else {
     
@@ -53,7 +53,7 @@ module.exports = function(passport) {
                         'lastName': newUser.lastName
                     } 
                     ,function(err, result){
-                        newUser.id = 22  //change this
+                        //newUser.id = result._id;   //change this
                         console.log(result);
                     
                         return done(null, newUser);
@@ -74,19 +74,19 @@ module.exports = function(passport) {
                 if (err){
                     return done(err);
                 }
-                if (!result.length) {
+                if (!result) {
                     console.log('no user found');
                     return done(null, false);
                 } 
                 
                 // if the user is found but the password is wrong
-                if (!(bcrypt.compareSync(password, result[0].password))){
+                if (!(bcrypt.compareSync(password, result.password))){
                     console.log('wrong password');
                     return done(null, false);
                 }
                 //return user
-                console.log('success');
-                return done(null, result[0]);			
+                console.log(result);
+                return done(null, result._id);			
             });
         }));
     });  

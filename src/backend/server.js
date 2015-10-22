@@ -4,6 +4,7 @@ var http            = require('http');
 var cookieParser    = require('cookie-parser');
 var session         = require('express-session');
 var passport        = require('passport');
+var LocalStrategy  = require('passport-local');
 
 var app = express();
 var server = http.createServer(app);
@@ -33,7 +34,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/routes.js')(app);
+require('./routes/routes.js')(app, passport);
 
 
 app.use(express.static(config.folder.dist));
@@ -42,12 +43,13 @@ if (SP_ENVIRONMENT === 'local') {
     app.use('/img', express.static(config.folder.img));              
 }
 
+//Test Authentication, eventually remove
 app.get('/testing123', function(req, res){
-      if(!req.isAuthenticated()){
-      res.send("Not Authenticated");
+      if(req.isAuthenticated){
+      res.send("Authenticated");
       }
       else
-      res.send("Authenticated");
+      res.send("Not Authenticated");
 })
 
 app.get('/', config.route.index);
