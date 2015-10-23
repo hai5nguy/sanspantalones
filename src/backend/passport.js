@@ -12,7 +12,7 @@ module.exports = function(passport) {
     
         //serialize user
         passport.serializeUser(function(user, done) {
-            done(null, user.id);
+            done(null, user._id);
         });
     
         //deserialize the user
@@ -53,10 +53,10 @@ module.exports = function(passport) {
                         'lastName': newUser.lastName
                     } 
                     ,function(err, result){
-                        //newUser.id = result._id;   //change this
+                        newUser.id = result._id;   //change this
                         console.log(result);
                     
-                        return done(null, newUser);
+                        return done(null, result.ops[0]);
                     });	
                 }	
             });
@@ -86,7 +86,7 @@ module.exports = function(passport) {
                 }
                 //return user
                 console.log(result);
-                return done(null, result._id);			
+                return done(null, result);			
             });
         }));
     });  
